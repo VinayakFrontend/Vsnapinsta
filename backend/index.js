@@ -41,7 +41,7 @@ app.get("*", (req,res)=>{
 })
 
 
-server.listen(PORT,'https://vsnapinsta.vercel.app', () => {
+server.listen(PORT () => {
     connectDB();
     console.log(`Server listen at port ${PORT}`);
 });
