@@ -80,11 +80,17 @@ export const login = async (req, res) => {
             following: user.following,
             posts: populatedPosts
         }
-        return res.cookie('token', token, { httpOnly: true, sameSite: 'strict', maxAge: 1 * 24 * 60 * 60 * 1000 }).json({
-            message: `Welcome back ${user.username}`,
-            success: true,
-            user
-        });
+      return res.cookie('token', token, {
+  httpOnly: true,
+  sameSite: 'None',     // <== Required for cross-site cookie
+  secure: true,         // <== Required for SameSite=None to work (HTTPS only)
+  maxAge: 24 * 60 * 60 * 1000, // 1 day
+}).json({
+  message: `Welcome back ${user.username}`,
+  success: true,
+  user
+});
+
 
     } catch (error) {
         console.log(error);
